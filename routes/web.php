@@ -23,4 +23,12 @@ Route::get('/profile', 'HomeController@profile')->name('profile');
 
 Route::get('/control', 'HomeController@control')->name('control');
 
-Route::POST('/update-role/{user}', 'HomeController@updateRole')->name('update-role');
+Route::post('/update-role/{user}', 'HomeController@updateRole')->name('update-role');
+
+Route::get('/full-control', 'HomeController@fullControl')->name('full-control');
+
+Route::post('/update-user/{user}', 'HomeController@updateUser')->name('update-user');
+
+Route::post('/delete-user/{user}', 'HomeController@deleteUser')->name('delete-user');
+
+Route::post('/id/edit/{user}', 'HomeController@editUser')->name('edit-user');

@@ -47,4 +47,30 @@ class HomeController extends Controller
         $user->update($request->all());
         return redirect("/control");
     }
+
+    public function updateUser(Request $request,User $user)
+    {
+        $user->update($request->all());
+        return redirect("/full-control");
+    }
+
+    public function fullControl(Request $request)
+    {
+        if (Auth::user()->role > 1 )
+        {
+            return redirect("/");
+        }
+        $users = DB::table('users')->get();
+        return view('full-control',compact('users'));
+    }
+    public function deleteUser(Request $request,User $user)
+    {
+        $user->delete();
+        return redirect("/full-control");
+    }
+    public function editUser(Request $request,User $user)
+    {
+        $user->delete();
+        return redirect("/full-control");
+    }
 }

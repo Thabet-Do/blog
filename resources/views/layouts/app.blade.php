@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/my-style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -31,6 +33,9 @@
                     <a class="navbar-brand" href="{{ url('/profile') }}">Profile</a>
                     @if(Auth::user()->role <= 2)
                         <a class="navbar-brand" href="{{ url('/control') }}">Control</a>
+                    @endif
+                    @if(Auth::user()->role == 1)
+                        <a class="navbar-brand" href="{{ url('/full-control') }}">Full Control</a>
                     @endif
                 @endif
 
@@ -84,5 +89,6 @@
             @yield('content')
         </main>
     </div>
+@yield('scripts')
 </body>
 </html>

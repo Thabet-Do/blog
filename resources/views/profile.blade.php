@@ -13,9 +13,13 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        ID: {{Auth::user()->id}} <br>
-                        Username: {{Auth::user()->name}} <br>
-                        Email: {{Auth::user()->email}}
+                        ID: {{Auth::user()->id}} <hr>
+                            Name: {{Auth::user()->name}} <hr>
+                            Username: {{Auth::user()->username}} <hr>
+                            Email: {{Auth::user()->email}}<hr>
+                        <div>
+                            <button class="btn btn-primary" onclick="window.open('/id/edit/{{Auth::user()->id}}')">Edit</button>
+                        </div>
                     </div>
                 </div>
             </div>
