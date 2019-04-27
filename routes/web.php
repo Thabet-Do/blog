@@ -10,23 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-use Illuminate\Support\Facades\Route;//comment this line later
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
 Route::GET('/', function () {
     return view('welcome');
 });
 
+Auth::routes(['verify' => true]);
 
-//Update User
-Route::PUT('/admin/user/{user}','RegistrationController@update')->name('update');
-
-Route::get('/admin/user/{user}/email','RegistrationController@sendEmail');
-
-
-
-//////////////////////////////[------Working------]/////////////////////////////////
 
 //Create User
 Route::POST('/admin/user','RegistrationController@register')->name('register');
+
+//Update User
+Route::PUT('/admin/user/{user}','RegistrationController@update')->name('update');
 
 //Delete User
 Route::DELETE('/admin/user/{user}','RegistrationController@delete')->name('delete');
@@ -39,3 +37,6 @@ Route::GET('/admin/users','RegistrationController@users')->name('users');
 
 //Activate user
 Route::GET('/admin/user/{user}/activate','RegistrationController@active')->name('user');
+
+//send email
+Route::get('/admin/user/{user}/email','RegistrationController@sendEmail');

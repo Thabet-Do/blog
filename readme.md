@@ -10,15 +10,19 @@ Run `Without Docker`:\
     
     $ cd blog
     
-3 - run server:
+3 - create database:\
+create database "sentinel" and run the command 
+
+    $ php artisan migrate
+    
+4 - run server:
 
     $ php artisan serve
     
-3 - open url and enjoy :
+5 - open url and enjoy :
 
     localhost:8000/
   
-
 
 
 Run `With Docker`:
@@ -34,7 +38,16 @@ Run `With Docker`:
 3 - run docker:
 
     $ docker-compose up -d nginx mysql phpmyadmin redis workspace rabbitmq
+   
+4- open workspace in docker 
     
-4 - open url and enjoy :
+    $ docker-compose exec workspace bash
+    
+5 - create database:\
+create database "sentinel" and run the command inside workspace
+
+    $ php artisan migrate
+        
+6 - open url and enjoy :
 
     localhost/

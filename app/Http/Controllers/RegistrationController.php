@@ -2,21 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\sendEmailJob;
 use App\Mail\sendEmail;
 use App\User;
+use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\MailController;
 use Sentinel;
-//use Swift;
 use Illuminate\Http\Request;
 
 class RegistrationController extends Controller
 {
     public function register(Request $request)
     {
-        $user = Sentinel::registerAndActivate($request->all());
-        $this->sendEmail($request->id);
-        dd($user);
+        $user = $request->all();
+
+
+        Sentinel::register($request->all());
+        $email = $user['email'];
+        $pass = $user['password'];
+        $credentials = [
+            'email'    => $email,
+            'password' => $pass
+        ];
+
+        $user = Sentinel::findByCredentials($credentials);
+
+        (new MailController)->basic_email($user);
     }
 
     public function delete(User $user)
@@ -30,43 +43,12 @@ class RegistrationController extends Controller
         return response($user);
     }
 
-    public function activate(User $user)
+    public function active(User $user)
     {
-        #open link with specific id
-//        return response($user);
-    }
+        $user = Sentinel::findById($user->id);
+        $activation = Activation::create($user);
+        dd($activation);
 
-
-    public function sendEmail(User $user)
-    {
-//        require_once 'autoload.php';
-//        require '../../../vendor/autoload.php';
-
-
-        $id = $user->id;
-
-        $email = $user->email;
-
-        $subject = 'Active Your Account';
-
-        $first_name = $user->first_name;
-
-        $msg = "
-        open link below to active your account
-        http:/localhost:8000/admin/user/$id/activate";
-
-        $headers = [env('MAIL_USERNAME') => 'Yes Soft'];
-
-        /*
-        // Create the Transport
-        $transport = (new Swift_SmtpTransport(env('MAIL_USERNAME'), 25))->setUsername(env('MAIL_USERNAME'))->setPassword(env('MAIL_PASSWORD'));
-        // Create the Mailer using your created Transport
-        $mailer = new Swift_Mailer($transport);
-        // Create a message
-        $message = (new Swift_Message($subject))->setFrom($headers)->setTo([$email => $first_name])->setBody($msg);
-        // Send the message
-        $result = $mailer->send($message);
-        */
     }
 
 
