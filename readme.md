@@ -10,20 +10,23 @@ Run `Without Docker`:\
     
     $ cd blog
 
-3- composer install   
+3 - composer install   
 
     $ composer install
  
-4 - create database:\
-create database "sentinel" and run the command 
+4 - create database:
+
+create database "`sentinel`"
+
+5 - migrate tables to database
 
     $ php artisan migrate
     
-5 - run server:
+6 - run server:
 
     $ php artisan serve --port=8000
     
-6 - open url and enjoy :
+7 - open url and enjoy :
 
     localhost:8000/
   
