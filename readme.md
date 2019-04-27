@@ -21,7 +21,7 @@ create database "sentinel" and run the command
     
 5 - run server:
 
-    $ php artisan serve
+    $ php artisan serve --port=8000
     
 6 - open url and enjoy :
 
