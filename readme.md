@@ -9,17 +9,21 @@ Run `Without Docker`:\
 2 - open project folder:
     
     $ cd blog
-    
-3 - create database:\
+
+3- composer install   
+
+    $ composer install
+ 
+4 - create database:\
 create database "sentinel" and run the command 
 
     $ php artisan migrate
     
-4 - run server:
+5 - run server:
 
     $ php artisan serve
     
-5 - open url and enjoy :
+6 - open url and enjoy :
 
     localhost:8000/
   
@@ -42,6 +46,10 @@ Run `With Docker`:
 4- open workspace in docker 
     
     $ docker-compose exec workspace bash
+    
+3- composer install   
+
+    $ composer install    
     
 5 - create database:\
 create database "sentinel" and run the command inside workspace
